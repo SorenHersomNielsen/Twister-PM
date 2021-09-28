@@ -1,36 +1,41 @@
 package com.example.oblopgave
 
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class FirebaseViewModel {
     private lateinit var auth: FirebaseAuth
 
-    var email: String = ""
-    var password: String = ""
-    var message: String = ""
-    fun SignIn() {
+    //var email: String = ""
+    //var password: String = ""
+    val message: MutableLiveData<String> = MutableLiveData()
+    val user: MutableLiveData<FirebaseUser> = MutableLiveData()
+
+
+    fun SignIn( email: String,password: String) {
         auth = Firebase.auth
+
 
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                message = "ok"
+                user.value = auth.currentUser
             } else {
-                message = task.exception?.message.toString()
+                message.value = task.exception?.message.toString()
             }
         }
+    }
+    fun CreateUser(email: String,password: String) {
+        auth = Firebase.auth
 
-        fun CreateUser() {
-            auth = Firebase.auth
-
-            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    message = "User created"
-                } else {
-                    message = task.exception?.message.toString()
-                }
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                message.value = "User created"
+            } else {
+                message.value = task.exception?.message.toString()
             }
         }
     }

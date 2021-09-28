@@ -1,11 +1,13 @@
 package com.example.oblopgave
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.example.oblopgave.databinding.FragmentFirstBinding
@@ -19,7 +21,7 @@ import com.google.firebase.ktx.Firebase
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
-    private lateinit var auth: FirebaseAuth
+
     private var firebaseViewModel: FirebaseViewModel = FirebaseViewModel()
 
 
@@ -32,7 +34,7 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        auth = Firebase.auth
+
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
@@ -43,6 +45,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.signIn.setOnClickListener {
+            Log.d("apple","signin")
             // TODO DRY
             val email = binding.emailInputField.text.toString().trim()
             val password = binding.passwordInputField.text.toString().trim()
@@ -55,19 +58,25 @@ class FirstFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            firebaseViewModel.email = email
-            firebaseViewModel.password = password
+            //firebaseViewModel.email = email
+            //firebaseViewModel.password = password
 
-            firebaseViewModel.SignIn()
-            if (firebaseViewModel.message == "ok"){
-                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-            }
-            else{
-                binding.messageView.text = firebaseViewModel.message
-            }
+            firebaseViewModel.SignIn(email,password)
+
+            firebaseViewModel.user.observe(viewLifecycleOwner, Observer
+            {
+                if (firebaseViewModel.user != null)  {
+                    findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+                }
+                else {
+                    binding.messageView.text = firebaseViewModel.message.toString()
+                }
+        }       )
         }
 
+
         binding.buttonCreateUser.setOnClickListener{
+            Log.d("apple","create")
             val email = binding.emailInputField.text.toString().trim()
             val password = binding.passwordInputField.text.toString().trim()
             if (email.isEmpty()) {
@@ -79,17 +88,21 @@ class FirstFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            firebaseViewModel.email = email
-            firebaseViewModel.password = password
+            //firebaseViewModel.email = email
+            //firebaseViewModel.password = password
+           /*
+            firebaseViewModel.CreateUser(email,password)
 
-
+            if (firebaseViewModel.message == "User created"){
+                binding.messageView.text = "you have been created, now you can sign in"
+            }
+            else
+            {
+                 binding.messageView.text = firebaseViewModel.message
+            }      */
 
 
         }
-
-
-
-
 
 
     }
