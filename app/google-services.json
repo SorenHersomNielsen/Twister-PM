@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "804161546273",
+    "project_id": "authentication-64297",
+    "storage_bucket": "authentication-64297.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804161546273:android:b69c4dadfb1188d588db60",
+        "android_client_info": {
+          "package_name": "com.example.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804161546273-mvj3jsfjgt9emvt25ihjfh52lcueq5cv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe11Q7_6bofnYuZtHbU7dOn-loxA00dU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804161546273-mvj3jsfjgt9emvt25ihjfh52lcueq5cv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804161546273:android:151e97b351c91dbc88db60",
+        "android_client_info": {
+          "package_name": "com.example.firebaseauthentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804161546273-mvj3jsfjgt9emvt25ihjfh52lcueq5cv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe11Q7_6bofnYuZtHbU7dOn-loxA00dU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804161546273-mvj3jsfjgt9emvt25ihjfh52lcueq5cv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804161546273:android:9f4d1145addc518788db60",
+        "android_client_info": {
+          "package_name": "com.example.oblopgave"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804161546273-mvj3jsfjgt9emvt25ihjfh52lcueq5cv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe11Q7_6bofnYuZtHbU7dOn-loxA00dU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804161546273-mvj3jsfjgt9emvt25ihjfh52lcueq5cv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
