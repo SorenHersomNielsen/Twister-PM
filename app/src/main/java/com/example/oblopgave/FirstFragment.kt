@@ -68,10 +68,18 @@ class FirstFragment : Fragment() {
                 if (firebaseViewModel.user != null)  {
                     findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                 }
-                else {
-                    binding.messageView.text = firebaseViewModel.message.toString()
+
+            })
+
+            // TODO talk to teacher about strange message
+            firebaseViewModel.message.observe(viewLifecycleOwner,
+                {
+                    if (firebaseViewModel.message != null)
+                    {
+                        binding.messageView.text = firebaseViewModel.message.toString()
+                    }
                 }
-        }       )
+                )
         }
 
 
