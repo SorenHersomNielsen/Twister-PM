@@ -45,7 +45,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.signIn.setOnClickListener {
-            Log.d("apple","signin")
+            Log.d("apple", "signin")
             // TODO DRY
             val email = binding.emailInputField.text.toString().trim()
             val password = binding.passwordInputField.text.toString().trim()
@@ -58,33 +58,26 @@ class FirstFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            //firebaseViewModel.email = email
-            //firebaseViewModel.password = password
-
-            firebaseViewModel.SignIn(email,password)
+            firebaseViewModel.SignIn(email, password)
 
             firebaseViewModel.user.observe(viewLifecycleOwner, Observer
             {
-                if (firebaseViewModel.user != null)  {
+                if (firebaseViewModel.user != null) {
                     findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                 }
-
             })
 
-            // TODO talk to teacher about strange message
             firebaseViewModel.message.observe(viewLifecycleOwner,
                 {
-                    if (firebaseViewModel.message != null)
-                    {
-                        binding.messageView.text = firebaseViewModel.message.toString()
+                    if (firebaseViewModel.message != null) {
+                        binding.messageView.text = firebaseViewModel.message.value
                     }
                 }
-                )
+            )
         }
 
-
-        binding.buttonCreateUser.setOnClickListener{
-            Log.d("apple","create")
+        binding.buttonCreateUser.setOnClickListener {
+            Log.d("apple", "create")
             val email = binding.emailInputField.text.toString().trim()
             val password = binding.passwordInputField.text.toString().trim()
             if (email.isEmpty()) {
@@ -96,23 +89,13 @@ class FirstFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            //firebaseViewModel.email = email
-            //firebaseViewModel.password = password
-           /*
-            firebaseViewModel.CreateUser(email,password)
-
-            if (firebaseViewModel.message == "User created"){
-                binding.messageView.text = "you have been created, now you can sign in"
-            }
-            else
-            {
-                 binding.messageView.text = firebaseViewModel.message
-            }      */
-
-
+            firebaseViewModel.CreateUser(email, password)
+                firebaseViewModel.message.observe(viewLifecycleOwner, {
+                    if (firebaseViewModel.message != null) {
+                        binding.messageView.text = firebaseViewModel.message.value
+                    }
+                })
         }
-
-
     }
 
         override fun onDestroyView() {
