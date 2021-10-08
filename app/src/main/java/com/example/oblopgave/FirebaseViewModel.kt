@@ -1,5 +1,6 @@
 package com.example.oblopgave
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
@@ -16,7 +17,7 @@ class FirebaseViewModel {
     private lateinit var auth: FirebaseAuth
 
     val message: MutableLiveData<String> = MutableLiveData()
-    val user: MutableLiveData<FirebaseUser> = MutableLiveData()
+    val user: MutableLiveData<FirebaseUser?> = MutableLiveData()
  
 
     fun SignIn( email: String,password: String) {
@@ -40,5 +41,11 @@ class FirebaseViewModel {
                 message.value = task.exception?.message
             }
         }
+    }
+
+    fun SignOut(){
+        Log.d("apple", "signout")
+        Firebase.auth.signOut()
+        user.value = null
     }
 }

@@ -11,5 +11,7 @@
         android:id="@+id/action_signout"
         android:orderInCategory="2"
         android:title="Sign out"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:visible="true"
+        />
 </menu>

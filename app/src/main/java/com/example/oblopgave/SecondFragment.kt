@@ -1,10 +1,8 @@
 package com.example.oblopgave
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.oblopgave.databinding.FragmentSecondBinding
 
@@ -14,6 +12,7 @@ import com.example.oblopgave.databinding.FragmentSecondBinding
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
+    private var firebaseViewModel: FirebaseViewModel = FirebaseViewModel()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,12 +22,25 @@ class SecondFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+         setHasOptionsMenu(true)
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+            inflater.inflate(R.menu.menu_main, menu)
+        }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+            return when (item.itemId) {
+                R.id.action_signout -> {
+                    firebaseViewModel.SignOut()
+                    findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+                    true
+                }
+                else -> super.onOptionsItemSelected(item)
+            }
+        }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
