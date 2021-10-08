@@ -90,6 +90,14 @@ class FirstFragment : Fragment() {
             }
 
             firebaseViewModel.CreateUser(email, password)
+
+                firebaseViewModel.user.observe(viewLifecycleOwner, {
+                    if (firebaseViewModel.user != null){
+                        binding.messageView.text = "now, you are created, you can now press on sign in"
+                    }
+                })
+
+
                 firebaseViewModel.message.observe(viewLifecycleOwner, {
                     if (firebaseViewModel.message != null) {
                         binding.messageView.text = firebaseViewModel.message.value
