@@ -97,7 +97,6 @@ class FirstFragment : Fragment() {
                     }
                 })
 
-
                 firebaseViewModel.message.observe(viewLifecycleOwner, {
                     if (firebaseViewModel.message != null) {
                         binding.messageView.text = firebaseViewModel.message.value
