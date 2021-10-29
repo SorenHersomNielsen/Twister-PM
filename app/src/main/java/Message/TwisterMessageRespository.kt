@@ -1,4 +1,4 @@
-package com.example.oblopgave
+package Message
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

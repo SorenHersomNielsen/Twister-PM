@@ -18,29 +18,40 @@ class FirebaseViewModel {
 
     val message: MutableLiveData<String> = MutableLiveData()
     val user: MutableLiveData<FirebaseUser?> = MutableLiveData()
- 
+    var Email: String = ""
+
 
     fun SignIn( email: String,password: String) {
         auth = Firebase.auth
 
+
+
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 user.value = auth.currentUser
+
+                Email = email
             } else {
                 message.value = task.exception?.message
             }
         }
+
     }
     fun CreateUser(email: String, password: String) {
         auth = Firebase.auth
 
+
+
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 user.value = auth.currentUser
+
+                Email = email
             } else {
                 message.value = task.exception?.message
             }
         }
+
     }
 
     fun SignOut(){

@@ -1,5 +1,8 @@
 package com.example.oblopgave
 
+import Message.Message
+import Message.MessageViewModel
+import Message.TwisterMessageAdapter
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -71,6 +74,22 @@ class SecondFragment : Fragment() {
             messageViewModel.reload()
             binding.swiperefresh.isRefreshing = false
         }
+
+        binding.CreateMessage.setOnClickListener{
+            val message: String = binding.WriteYourMessage.text.toString()
+            val email = firebaseViewModel.Email
+
+            val postmessage = Message(message,email)
+
+            messageViewModel.add(postmessage)
+
+            binding.swiperefresh.setOnRefreshListener {
+                messageViewModel.reload()
+                binding.swiperefresh.isRefreshing = false
+            }
+
+        }
+
     }
 
     override fun onDestroyView() {

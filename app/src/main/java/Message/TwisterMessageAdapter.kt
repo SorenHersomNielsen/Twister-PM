@@ -1,10 +1,11 @@
-package com.example.oblopgave
+package Message
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.oblopgave.R
 
 
 class TwisterMessageAdapter<T>(private val items: List<T>, private val onItemClicked: (position: Int) -> Unit) :

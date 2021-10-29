@@ -6,10 +6,25 @@
     android:orientation="vertical"
     tools:context=".FirstFragment">
 
+    <EditText
+        android:id="@+id/WriteYourMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Write your message"
+        android:text=""/>
+
+    <Button
+        android:id="@+id/CreateMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create message"/>
+
+
+
     <TextView
         android:id="@+id/textview_message"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
     <ProgressBar
         android:id="@+id/progressbar"

@@ -1,4 +1,4 @@
-package com.example.oblopgave
+package Message
 
 data class Message(val id: Int, val content: String, val user: String, val totalComments: Int ){
 constructor(content: String, user: String) : this(-1, content,user, -1)

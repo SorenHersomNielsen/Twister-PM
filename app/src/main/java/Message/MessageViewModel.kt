@@ -1,4 +1,4 @@
-package com.example.oblopgave
+package Message
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,6 @@ class MessageViewModel : ViewModel() {
     private val repository = TwisterMessageRespository()
     val MessageLiveData: LiveData<List<Message>> = repository.booksLiveData
     val errorMessageLiveData: LiveData<String> = repository.errorMessageLiveData
-    val updateMessageLiveData: LiveData<String> = repository.updateMessageLiveData
 
     init {
         reload()
