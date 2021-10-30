@@ -3,6 +3,7 @@ package com.example.oblopgave
 import Message.Message
 import Message.MessageViewModel
 import Message.TwisterMessageAdapter
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -34,26 +35,27 @@ class SecondFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-         setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         _binding1 = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-            inflater.inflate(R.menu.menu_main, menu)
-        }
+        inflater.inflate(R.menu.menu_main, menu)
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            return when (item.itemId) {
-                R.id.action_signout -> {
-                    firebaseViewModel.SignOut()
-                    findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-                    true
-                }
-                else -> super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.action_signout -> {
+                firebaseViewModel.SignOut()
+                findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+                true
             }
+            else -> super.onOptionsItemSelected(item)
         }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -62,7 +64,6 @@ class SecondFragment : Fragment() {
             binding.recyclerView.visibility = if (message == null) View.GONE else View.VISIBLE
             if (message != null) {
                 val adapter = TwisterMessageAdapter(message) { position ->
-
                 }
                 binding.recyclerView.layoutManager = LinearLayoutManager(activity)
                 binding.recyclerView.adapter = adapter
@@ -80,18 +81,27 @@ class SecondFragment : Fragment() {
             binding.swiperefresh.isRefreshing = false
         }
 
-        binding.CreateMessage.setOnClickListener{
+        binding.CreateMessage.setOnClickListener {
             val message: String = binding.WriteYourMessage.text.toString()
             val email: String = binding1.emailInputField.text.toString()
             Log.d("APPLE", email + message)
 
-                val postmessage = Message(message, email)
-                Log.d("Apple", "post $postmessage")
+            val postmessage = Message(message, email)
+            Log.d("Apple", "post $postmessage")
 
-                messageViewModel.add(postmessage)
+            messageViewModel.add(postmessage)
 
         }
 
+        binding.deletemessage.setOnClickListener {
+            val id: Int = binding.ID.text.toString().toInt()
+            val email = binding1.emailInputField.text.toString()
+
+            messageViewModel.delete(id)
+
+        // TODO delete not working properly 
+        //if (messageViewModel.MessageLiveData.value.contains(email)) messageViewModel.delete(id)
+        }
     }
 
     override fun onDestroyView() {
@@ -99,3 +109,5 @@ class SecondFragment : Fragment() {
         _binding = null
     }
 }
+
+

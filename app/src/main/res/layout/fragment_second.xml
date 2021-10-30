@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Write your message"
-        android:text=""/>
+        android:inputType="text"/>
 
     <Button
         android:id="@+id/CreateMessage"
@@ -19,6 +19,23 @@
         android:layout_height="wrap_content"
         android:text="Create message"/>
 
+    <EditText
+        android:id="@+id/ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="insert id"
+        android:inputType="number"/>
+    <Button
+        android:id="@+id/deletemessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete message"/>
+
+    <TextView
+        android:id="@+id/failmessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""/>
 
 
     <TextView
