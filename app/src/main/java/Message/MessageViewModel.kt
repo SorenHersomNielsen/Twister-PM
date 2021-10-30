@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 
 class MessageViewModel : ViewModel() {
     private val repository = TwisterMessageRespository()
-    val MessageLiveData: LiveData<List<Message>> = repository.booksLiveData
+    val MessageLiveData: LiveData<List<Message>> = repository.MessageLiveData
     val errorMessageLiveData: LiveData<String> = repository.errorMessageLiveData
 
     init {

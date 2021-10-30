@@ -12,9 +12,9 @@ class TwisterMessageRespository {
     private val url = "https://anbo-restmessages.azurewebsites.net/api/"
 
     private val twisterMessageService: TwisterMessageService
-    val booksLiveData: MutableLiveData<List<Message>> = MutableLiveData<List<Message>>()
+    val MessageLiveData: MutableLiveData<List<Message>> = MutableLiveData<List<Message>>()
     val errorMessageLiveData: MutableLiveData<String> = MutableLiveData()
-    val updateMessageLiveData: MutableLiveData<String> = MutableLiveData()
+    val PostDeleteMessageLiveData: MutableLiveData<String> = MutableLiveData()
 
     init {
         val build: Retrofit = Retrofit.Builder()
@@ -29,7 +29,7 @@ class TwisterMessageRespository {
             override fun onResponse(call: Call<List<Message>>, response: Response<List<Message>>) {
                 if (response.isSuccessful) {
                     //Log.d("APPLE", response.body().toString())
-                    booksLiveData.postValue(response.body())
+                    MessageLiveData.postValue(response.body())
                     errorMessageLiveData.postValue("")
                 } else {
                     val message = response.code().toString() + " " + response.message()
@@ -51,7 +51,7 @@ class TwisterMessageRespository {
             override fun onResponse(call: Call<Message>, response: Response<Message>) {
                 if (response.isSuccessful) {
                     Log.d("APPLE", "Added: " + response.body())
-                    updateMessageLiveData.postValue("Added: " + response.body())
+                    PostDeleteMessageLiveData.postValue("Added: " + response.body())
                 } else {
                     val message = response.code().toString() + " " + response.message()
                     errorMessageLiveData.postValue(message)
@@ -71,7 +71,7 @@ class TwisterMessageRespository {
             override fun onResponse(call: Call<Message>, response: Response<Message>) {
                 if (response.isSuccessful) {
                     Log.d("APPLE", "Updated: " + response.body())
-                    updateMessageLiveData.postValue("Deleted: " + response.body())
+                    PostDeleteMessageLiveData.postValue("Deleted: " + response.body())
                 } else {
                     val message = response.code().toString() + " " + response.message()
                     errorMessageLiveData.postValue(message)

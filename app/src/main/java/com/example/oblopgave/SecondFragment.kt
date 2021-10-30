@@ -4,12 +4,15 @@ import Message.Message
 import Message.MessageViewModel
 import Message.TwisterMessageAdapter
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.oblopgave.databinding.FragmentFirstBinding
 import com.example.oblopgave.databinding.FragmentSecondBinding
+import kotlin.math.log
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -17,13 +20,15 @@ import com.example.oblopgave.databinding.FragmentSecondBinding
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
-    private var firebaseViewModel: FirebaseViewModel = FirebaseViewModel()
+    private var _binding1: FragmentFirstBinding? = null
+    private val firebaseViewModel: FirebaseViewModel by activityViewModels()
     private val messageViewModel: MessageViewModel by activityViewModels()
 
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private val binding1 get() = _binding1!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +36,7 @@ class SecondFragment : Fragment() {
     ): View? {
          setHasOptionsMenu(true)
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding1 = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -52,7 +58,6 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         messageViewModel.MessageLiveData.observe(viewLifecycleOwner) { message ->
-            //Log.d("APPLE", "observer $books")
             binding.progressbar.visibility = View.GONE
             binding.recyclerView.visibility = if (message == null) View.GONE else View.VISIBLE
             if (message != null) {
@@ -77,16 +82,13 @@ class SecondFragment : Fragment() {
 
         binding.CreateMessage.setOnClickListener{
             val message: String = binding.WriteYourMessage.text.toString()
-            val email = firebaseViewModel.Email
+            val email: String = binding1.emailInputField.text.toString()
+            Log.d("APPLE", email + message)
 
-            val postmessage = Message(message,email)
+                val postmessage = Message(message, email)
+                Log.d("Apple", "post $postmessage")
 
-            messageViewModel.add(postmessage)
-
-            binding.swiperefresh.setOnRefreshListener {
-                messageViewModel.reload()
-                binding.swiperefresh.isRefreshing = false
-            }
+                messageViewModel.add(postmessage)
 
         }
 
