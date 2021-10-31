@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".FirstFragment">
+    tools:context=".SecondFragment">
 
     <EditText
         android:id="@+id/WriteYourMessage"
@@ -30,6 +30,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete message"/>
+    <Button
+        android:id="@+id/SeeComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="see comment"/>
 
     <TextView
         android:id="@+id/failmessage"

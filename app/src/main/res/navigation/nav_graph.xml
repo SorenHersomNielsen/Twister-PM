@@ -24,5 +24,20 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_thridFragment"
+            app:destination="@id/thridFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/thridFragment"
+        android:name="com.example.oblopgave.ThridFragment"
+        android:label="fragment_thrid"
+        tools:layout="@layout/fragment_thrid" >
+        <action
+            android:id="@+id/action_thridFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_thridFragment_to_SecondFragment2"
+            app:destination="@id/SecondFragment" />
     </fragment>
 </navigation>

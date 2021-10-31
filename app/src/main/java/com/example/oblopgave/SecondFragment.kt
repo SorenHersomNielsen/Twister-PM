@@ -3,7 +3,6 @@ package com.example.oblopgave
 import Message.Message
 import Message.MessageViewModel
 import Message.TwisterMessageAdapter
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -13,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.oblopgave.databinding.FragmentFirstBinding
 import com.example.oblopgave.databinding.FragmentSecondBinding
-import kotlin.math.log
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -102,6 +100,11 @@ class SecondFragment : Fragment() {
         // TODO delete not working properly 
         //if (messageViewModel.MessageLiveData.value.contains(email)) messageViewModel.delete(id)
         }
+
+        binding.SeeComment.setOnClickListener{
+            findNavController().navigate(R.id.action_SecondFragment_to_thridFragment)
+        }
+
     }
 
     override fun onDestroyView() {
