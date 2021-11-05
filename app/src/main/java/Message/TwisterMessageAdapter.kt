@@ -35,7 +35,7 @@ class TwisterMessageAdapter<T>(private val items: List<T>, private val onItemCli
             init {
                 itemView.setOnClickListener(this)
             }
-            // TODO talk to teacher about it
+
             override fun onClick(view: View) {
                 val position = bindingAdapterPosition
                 onItemClicked(position)

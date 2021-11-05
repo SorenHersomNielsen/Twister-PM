@@ -28,9 +28,11 @@ class FirebaseViewModel : ViewModel(){
             if (task.isSuccessful) {
                 user.value = auth.currentUser
 
+                Log.d("apple", "login success")
+
             } else {
                 message.value = task.exception?.message
-                Log.d("Apple", "fail")
+                Log.d("Apple", " login fail")
             }
         }
 
@@ -41,9 +43,10 @@ class FirebaseViewModel : ViewModel(){
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 user.value = auth.currentUser
-
+                Log.d("Apple", "create user success")
             } else {
                 message.value = task.exception?.message
+                Log.d("Apple", "create user fail")
             }
         }
 

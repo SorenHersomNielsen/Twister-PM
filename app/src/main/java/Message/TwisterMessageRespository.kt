@@ -34,14 +34,14 @@ class TwisterMessageRespository {
                 } else {
                     val message = response.code().toString() + " " + response.message()
                     errorMessageLiveData.postValue(message)
-                    Log.d("APPLE", message)
+                    Log.d("apple", message)
                 }
             }
 
             override fun onFailure(call: Call<List<Message>>, t: Throwable) {
                 //booksLiveData.postValue(null)
                 errorMessageLiveData.postValue(t.message)
-                Log.d("APPLE", t.message!!)
+                Log.d("apple", t.message!!)
             }
         })
     }
@@ -50,18 +50,18 @@ class TwisterMessageRespository {
         twisterMessageService.saveMessage(message).enqueue(object : Callback<Message> {
             override fun onResponse(call: Call<Message>, response: Response<Message>) {
                 if (response.isSuccessful) {
-                    Log.d("APPLE", "Added: " + response.body())
+                    Log.d("apple", "Added: " + response.body())
                     PostDeleteMessageLiveData.postValue("Added: " + response.body())
                 } else {
                     val message = response.code().toString() + " " + response.message()
                     errorMessageLiveData.postValue(message)
-                    Log.d("APPLE", message)
+                    Log.d("apple", message)
                 }
             }
 
             override fun onFailure(call: Call<Message>, t: Throwable) {
                 errorMessageLiveData.postValue(t.message)
-                Log.d("APPLE", t.message!!)
+                Log.d("apple", t.message!!)
             }
         })
     }
@@ -70,18 +70,18 @@ class TwisterMessageRespository {
         twisterMessageService.deleteMessage(id).enqueue(object : Callback<Message> {
             override fun onResponse(call: Call<Message>, response: Response<Message>) {
                 if (response.isSuccessful) {
-                    Log.d("APPLE", "Updated: " + response.body())
+                    Log.d("apple", "Updated: " + response.body())
                     PostDeleteMessageLiveData.postValue("Deleted: " + response.body())
                 } else {
                     val message = response.code().toString() + " " + response.message()
                     errorMessageLiveData.postValue(message)
-                    Log.d("APPLE", message)
+                    Log.d("apple", message)
                 }
             }
 
             override fun onFailure(call: Call<Message>, t: Throwable) {
                 errorMessageLiveData.postValue(t.message)
-                Log.d("APPLE", t.message!!)
+                Log.d("apple", t.message!!)
             }
         })
     }

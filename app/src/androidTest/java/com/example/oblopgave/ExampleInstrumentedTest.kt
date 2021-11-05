@@ -49,9 +49,6 @@ class ExampleInstrumentedTest {
 
         pause(1000);
 
-        
-
-
         Espresso.onView(ViewMatchers.withText("All Message"))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }

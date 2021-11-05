@@ -1,5 +1,6 @@
 package com.example.oblopgave
 
+import Comment.CommentViewModel
 import Message.Message
 import Message.MessageViewModel
 import Message.TwisterMessageAdapter
@@ -8,10 +9,14 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.oblopgave.databinding.FragmentFirstBinding
 import com.example.oblopgave.databinding.FragmentSecondBinding
+import kotlin.math.log
+
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -22,7 +27,7 @@ class SecondFragment : Fragment() {
     private var _binding1: FragmentFirstBinding? = null
     private val firebaseViewModel: FirebaseViewModel by activityViewModels()
     private val messageViewModel: MessageViewModel by activityViewModels()
-
+    private val messageid: CommentViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -102,7 +107,9 @@ class SecondFragment : Fragment() {
         }
 
         binding.SeeComment.setOnClickListener{
-            findNavController().navigate(R.id.action_SecondFragment_to_thridFragment)
+            Log.d("apple", "moving to third fragment")
+            messageid.messageId = binding.ID.text.toString().toInt()
+            findNavController().navigate(R.id.action_SecondFragment_to_thirdFragment)
         }
 
     }
