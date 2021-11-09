@@ -1,5 +1,6 @@
 package Comment
 
+import android.support.v4.app.INotificationSideChannel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.oblopgave.SecondFragment
@@ -32,31 +33,25 @@ class CommentRepository {
             .baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create()).build()
         commentservice = build.create(CommentService::class.java)
-        Log.d("apple", secondBinding.messageId.toString())
             getAllComment(secondBinding.messageId)
     }
 
     fun getAllComment(messageId: Int){
-        //Log.d("apple", "getallcomment: " + messageId.toString().toInt())
+
         commentservice.getAllComment(messageId).enqueue(object : Callback<List<Comment>> {
             override fun onResponse(call: Call<List<Comment>>, response: Response<List<Comment>>) {
                 if (response.isSuccessful) {
-                    //Log.d("apple", response.body().toString())
                     CommentLiveData.postValue(response.body())
                     errorCommentLiveData.postValue("")
-                    //Log.d("apple", "get all comment success")
 
                 } else {
-                    //Log.d("apple","get all comment fail" )
                     val comment = response.code().toString() + " " + response.message()
                     errorCommentLiveData.postValue(comment)
-                    //Log.d("apple", comment)
                 }
             }
 
             override fun onFailure(call: Call<List<Comment>>, t: Throwable) {
                 errorCommentLiveData.postValue(t.message)
-                //Log.d("apple", t.message!!)
             }
         })
     }
@@ -65,18 +60,35 @@ class CommentRepository {
         commentservice.saveComment(messageId, comment).enqueue(object : Callback<Comment> {
             override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
                 if (response.isSuccessful) {
-                    //Log.d("apple", "Added: " + response.body())
                     PostDeleteCommentLiveData.postValue("Added: " + response.body())
                 } else {
                     val message = response.code().toString() + " " + response.message()
                     errorCommentLiveData.postValue(message)
-                    //Log.d("apple", message)
                 }
             }
 
             override fun onFailure(call: Call<Comment>, t: Throwable) {
                 errorCommentLiveData.postValue(t.message)
-                //Log.d("apple", t.message!!)
+            }
+        })
+    }
+
+    fun deleteComment(messageId: Int, commentId: Int) {
+        commentservice.deleteComment(messageId, commentId).enqueue(object : Callback<Comment> {
+            override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
+                if (response.isSuccessful) {
+                    Log.d("APPLE", "Updated: " + response.body())
+                    PostDeleteCommentLiveData.postValue("Deleted: " + response.body())
+                } else {
+                    val message = response.code().toString() + " " + response.message()
+                    errorCommentLiveData.postValue(message)
+                    Log.d("APPLE", message)
+                }
+            }
+
+            override fun onFailure(call: Call<Comment>, t: Throwable) {
+                errorCommentLiveData.postValue(t.message)
+                Log.d("APPLE", t.message!!)
             }
         })
     }

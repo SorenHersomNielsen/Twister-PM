@@ -94,6 +94,13 @@ class ThirdFragment : Fragment() {
 
         }
 
+        binding.deleteComment.setOnClickListener {
+            val messageId: Int = commentViewModel.messageId
+            val commentId: Int = binding.ID.text.toString().toInt()
+
+            commentViewModel.delete(messageId,commentId)
+        }
+
     }
 
     override fun onDestroyView() {

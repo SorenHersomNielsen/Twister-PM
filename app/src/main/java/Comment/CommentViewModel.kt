@@ -30,4 +30,8 @@ class CommentViewModel : ViewModel() {
         Log.d("apple", messageId.toString() + " " + comment )
             repository.saveComment(messageId, comment)
     }
+
+    fun delete(messageId: Int, commentId: Int){
+        repository.deleteComment(messageId,commentId)
+    }
 }
