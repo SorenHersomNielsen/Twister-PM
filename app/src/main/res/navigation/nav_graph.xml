@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_SecondFragment_to_thirdFragment"
             app:destination="@id/thirdFragment" />
+        <argument
+            android:name="email"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/thirdFragment"
@@ -39,5 +42,11 @@
         <action
             android:id="@+id/action_thirdFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <argument
+            android:name="user"
+            app:argType="string" />
+        <argument
+            android:name="messageId"
+            app:argType="integer" />
     </fragment>
 </navigation>

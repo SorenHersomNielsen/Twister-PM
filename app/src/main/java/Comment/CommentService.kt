@@ -8,7 +8,7 @@ interface CommentService {
     fun getAllComment(@Path("messageId") messageId: Int) : Call<List<Comment>>
 
     @POST("{messageid}/comments")
-    fun saveComment(@Path("messageId") messageId: Int, @Body comment: Comment): Call<Comment>
+    fun saveComment(@Path("messageid") messageid: Int, @Body comment: Comment): Call<Comment>
 
     @DELETE("{messageId}/comments/{commentId}")
     fun deleteComment(@Path("messageId") meessageId: Int, @Path("commentId") commentId: Int)

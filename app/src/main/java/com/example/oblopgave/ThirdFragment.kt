@@ -1,14 +1,16 @@
 package com.example.oblopgave
 
+import Comment.Comment
 import Comment.CommentAdapter
 import Comment.CommentViewModel
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.oblopgave.databinding.FragmentSecondBinding
 import com.example.oblopgave.databinding.FragmentThirdBinding
 
 
@@ -22,6 +24,9 @@ class ThirdFragment : Fragment() {
     private var _binding: FragmentThirdBinding? = null
     private val firebaseViewModel: FirebaseViewModel by activityViewModels()
     private val commentViewModel: CommentViewModel by activityViewModels()
+    private val args: ThirdFragmentArgs by navArgs()
+
+
 
     private val binding get() = _binding!!
 
@@ -57,6 +62,7 @@ class ThirdFragment : Fragment() {
         commentViewModel.commentLiveData.observe(viewLifecycleOwner){ comment ->
             binding.progressbar.visibility  = View.GONE
             binding.recyclerView.visibility = if (comment == null) View.GONE else View.VISIBLE
+            //Log.d("apple", commentViewModel.commentLiveData.value.toString())
             if (comment != null) {
                 val adapter = CommentAdapter(comment) { position ->
                 }
@@ -68,11 +74,26 @@ class ThirdFragment : Fragment() {
             binding.Comment.text = errorcomment
         }
 
-
+        commentViewModel.reload(commentViewModel.messageId)
 
         binding.swiperefresh.setOnClickListener{
+            commentViewModel.reload(commentViewModel.messageId)
             binding.swiperefresh.isRefreshing = false
         }
+
+        binding.CreateComment.setOnClickListener{
+
+            val messageId = commentViewModel.messageId
+            val comment = binding.WriteYourComment.text.toString()
+            val user = args.user
+            Log.d("apple", user)
+
+            val postComment = Comment(messageId, messageId, comment, user)
+            Log.d("apple", postComment.toString())
+            commentViewModel.add(postComment)
+
+        }
+
     }
 
     override fun onDestroyView() {

@@ -6,14 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.oblopgave.databinding.FragmentFirstBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -21,10 +19,7 @@ import com.google.firebase.ktx.Firebase
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
-
     private var firebaseViewModel: FirebaseViewModel = FirebaseViewModel()
-
-
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -63,7 +58,10 @@ class FirstFragment : Fragment() {
             firebaseViewModel.user.observe(viewLifecycleOwner, Observer
             {
                 if (firebaseViewModel.user != null) {
-                    findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+
+                    val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(email)
+
+                    findNavController().navigate(action)
                 }
             })
 

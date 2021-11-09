@@ -27,7 +27,6 @@ class FirebaseViewModel : ViewModel(){
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 user.value = auth.currentUser
-
                 Log.d("apple", "login success")
 
             } else {

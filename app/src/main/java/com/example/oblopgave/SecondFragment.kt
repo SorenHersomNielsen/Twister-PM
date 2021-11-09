@@ -9,13 +9,11 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.oblopgave.databinding.FragmentFirstBinding
 import com.example.oblopgave.databinding.FragmentSecondBinding
-import kotlin.math.log
+
 
 
 /**
@@ -24,15 +22,16 @@ import kotlin.math.log
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
-    private var _binding1: FragmentFirstBinding? = null
     private val firebaseViewModel: FirebaseViewModel by activityViewModels()
     private val messageViewModel: MessageViewModel by activityViewModels()
     private val messageid: CommentViewModel by activityViewModels()
+    private val args: SecondFragmentArgs by navArgs()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val binding1 get() = _binding1!!
+    var messageId: Int = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +39,6 @@ class SecondFragment : Fragment() {
     ): View? {
         setHasOptionsMenu(true)
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
-        _binding1 = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -86,7 +84,7 @@ class SecondFragment : Fragment() {
 
         binding.CreateMessage.setOnClickListener {
             val message: String = binding.WriteYourMessage.text.toString()
-            val email: String = binding1.emailInputField.text.toString()
+            val email: String = args.email
             Log.d("APPLE", email + message)
 
             val postmessage = Message(message, email)
@@ -98,7 +96,7 @@ class SecondFragment : Fragment() {
 
         binding.deletemessage.setOnClickListener {
             val id: Int = binding.ID.text.toString().toInt()
-            val email = binding1.emailInputField.text.toString()
+            val email = args.email
 
             messageViewModel.delete(id)
 
@@ -108,8 +106,14 @@ class SecondFragment : Fragment() {
 
         binding.SeeComment.setOnClickListener{
             Log.d("apple", "moving to third fragment")
-            messageid.messageId = binding.ID.text.toString().toInt()
-            findNavController().navigate(R.id.action_SecondFragment_to_thirdFragment)
+            messageId = binding.ID.text.toString().toInt()
+            messageid.messageId = messageId
+            Log.d("apple",messageid.messageId.toString())
+
+            val action = SecondFragmentDirections.actionSecondFragmentToThirdFragment(args.email, messageId)
+
+            findNavController().navigate(action)
+            //findNavController().navigate(R.id.action_SecondFragment_to_thirdFragment)
         }
 
     }

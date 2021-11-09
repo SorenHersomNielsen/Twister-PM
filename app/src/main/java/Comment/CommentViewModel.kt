@@ -13,7 +13,7 @@ class CommentViewModel : ViewModel() {
 
     init {
         Log.d("apple", "comment init" + messageId)
-        reload(messageId)
+            reload(messageId)
     }
 
     fun reload(messageId: Int) {
@@ -24,5 +24,10 @@ class CommentViewModel : ViewModel() {
     operator fun get(index: Int): Comment? {
         Log.d("apple", "comment get")
         return commentLiveData.value?.get(index)
+    }
+
+    fun add(comment: Comment)  {
+        Log.d("apple", messageId.toString() + " " + comment )
+            repository.saveComment(messageId, comment)
     }
 }

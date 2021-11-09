@@ -18,7 +18,7 @@ class CommentAdapter<T>(private val items: List<T>, private val onItemClicked: (
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.list_item, viewGroup, false)
-        return CommentAdapter.MyViewHolder(view, onItemClicked)
+        return MyViewHolder(view, onItemClicked)
     }
 
     override fun onBindViewHolder(viewHolder: CommentAdapter.MyViewHolder, position: Int) {
