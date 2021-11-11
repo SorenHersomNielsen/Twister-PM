@@ -79,7 +79,6 @@ class ThirdFragment : Fragment() {
         commentViewModel.commentLiveData.observe(viewLifecycleOwner){ comment ->
             binding.progressbar.visibility  = View.GONE
             binding.recyclerView.visibility = if (comment == null) View.GONE else View.VISIBLE
-            //Log.d("apple", commentViewModel.commentLiveData.value.toString())
             if (comment != null) {
                 val adapter = CommentAdapter(comment) { position ->
                 }

@@ -1,11 +1,8 @@
 package Comment
 
-import android.support.v4.app.INotificationSideChannel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.oblopgave.SecondFragment
-import com.example.oblopgave.databinding.FragmentSecondBinding
-import com.example.oblopgave.databinding.FragmentThirdBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

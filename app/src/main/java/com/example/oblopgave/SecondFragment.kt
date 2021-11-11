@@ -96,12 +96,9 @@ class SecondFragment : Fragment() {
 
         binding.deletemessage.setOnClickListener {
             val id: Int = binding.ID.text.toString().toInt()
-            val email = args.email
+            val email: String = args.email
 
             messageViewModel.delete(id)
-
-        // TODO delete not working properly 
-        //if (messageViewModel.MessageLiveData.value.contains(email)) messageViewModel.delete(id)
         }
 
         binding.SeeComment.setOnClickListener{
@@ -123,5 +120,7 @@ class SecondFragment : Fragment() {
         _binding = null
     }
 }
+
+
 
 
